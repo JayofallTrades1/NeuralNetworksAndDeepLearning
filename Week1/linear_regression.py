@@ -45,5 +45,20 @@ def update_weights(features, targets, weights, learning_rate):
 bias = np.ones(shape=len(features),1))
 features = np.append(bias, features, axis=1)
 
+def train(features, labels, weights, learning_rate, iters):
+    cost_history = []
+
+    for i in range(iters):
+        weights = update_weights(features, labels, weights, learning_rate)
+
+        #Calculate error for auditing purposes
+        cost = cost_function(features, labels, weights)
+        cost_history.append(cost)
+
+        # Log Progress
+        if i % 1000 == 0:
+            print "iter: "+str(i) + " cost: "+str(cost)
+
+    return weights, cost_history
 
 	
